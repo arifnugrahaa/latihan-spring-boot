@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap CSS -->
-    <link href="webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <title th:text="${msg}">Demo Spring MVC</title>
 </head>
 <body>
@@ -46,31 +46,28 @@
         </div>
       </nav>
       <div class="container">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Code</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr th:each="product : ${products}">
-            <td th:text="${product.id}"></td>
-            <td th:text="${product.code}"></td>
-            <td th:text="${product.name}"></td>
-            <td th:text="${product.price}"></td>
-            <td>
-              <a th:href="@{'/edit/'+${product.id}}" class="btn btn-success">Edit</a>
-              <a th:href="@{'/delete/'+${product.id}}" class="btn btn-danger">Del</a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+        <h2>Edit Product</h2>
+        <div>
+            <form th:object="${product}" th:action="@{/update}" method="post">
+                <div class="form-group">
+                    <label for="">Code</label>
+                    <input type="text" name="" id="" class="form-control" th:field="*{code}">
+                </div>
+                <div class="form-group">
+                    <label for="">Name</label>
+                    <input type="text" name="" id="" class="form-control" th:field="*{name}">
+                </div>
+                <div class="form-group">
+                    <label for="">Price</label>
+                    <input type="number" name="" id="" class="form-control" th:field="*{price}">
+                </div>
+                <br>
+                <input type="hidden" name="" th:field="*{id}">
+                <p><button type="submit" class="btn btn-primary">Save</button></p>
+            </form>
+        </div>
       </div>
 
-    <script src="webjars/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/webjars/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
