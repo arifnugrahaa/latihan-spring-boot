@@ -53,7 +53,7 @@ public class HomeController {
 
     @PostMapping("/update")
     public String update(Product product, Model model){
-        productService.updtaeProduct(product);
+        productService.updateProduct(product);
         return "redirect:/";
     }
 }
