@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.arif.dto.SearchFormData;
 import com.arif.entity.Product;
 import com.arif.service.ProductService;
 
@@ -22,6 +23,7 @@ public class HomeController {
     public String welcome(Model model){
         String message = "Welcome to Spring MVC !!";
         model.addAttribute("msg", message);
+        model.addAttribute("searchForm", new SearchFormData());
         model.addAttribute("products", productService.findAll());
         return "index";
     }
@@ -55,5 +57,14 @@ public class HomeController {
     public String update(Product product, Model model){
         productService.updateProduct(product);
         return "redirect:/";
+    }
+
+    @PostMapping("/search")
+    public String search(SearchFormData searchFormData, Model model){
+        String message = "Welcome to Spring MVC !!";
+        model.addAttribute("msg", message);
+        model.addAttribute("searchForm", searchFormData);
+        model.addAttribute("products", productService.findByName(searchFormData.getKeyword()));
+        return "index";
     }
 }
