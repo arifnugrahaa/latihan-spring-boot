@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.arif.entity.Product;
 import com.arif.repo.ProductRepo;
-import com.arif.utils.RandomNumber;
 
 @Service
 @Transactional
@@ -20,11 +19,15 @@ public class ProductService {
     @Autowired
     private ProductRepo repo;
 
+    @Autowired
+    private EmailService emailService;
+
     public Iterable<Product> findAll(){
         return repo.findAll();
     }
 
     public void addProduct(Product product){
+        emailService.sendEmail("arifnugraha1243@gmail.com", "New Product Created", "Hi, New Product is Created: "+ product.getCode()+" - "+ product.getName());
         repo.save(product);
     }
 
